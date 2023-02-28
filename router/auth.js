@@ -93,8 +93,8 @@ router.post('/editprofile', (req, res) => {
     User.findOne({_id:_id}).then(
         (userExist)=>{
             User.findOne({phone: phone}).then((phoneExist)=>{
-                
-                if(phoneExist && phoneExist!==userExist.phone){
+
+                if(phoneExist && phoneExist.phone!==userExist.phone){
                     res.status(501).json({message:"phone number is already registered"});
                 }
                 else{
