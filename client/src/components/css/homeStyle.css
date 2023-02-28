@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+#corousel{
+    width:700px;
+    margin:auto;
+    height:auto;
+    margin-top:70px;
+    padding-bottom: 100px;
+}
+#corousel-body{
+    box-shadow: 0 0 20px 10px rgb(137, 133, 141);
+}
+#welcome{
+    margin:auto;
+    margin-top: 50px;
+    text-align: center;
+    font-family: 'Work Sans', sans-serif;
+}
+#welcome p{
+    text-align: justify;
+    padding:10px 5px;
+    width:900px;
+    margin-left: -105px;
+}
+@media screen and (max-width:750px){
+    #corousel{
+        margin:0;
+        height: auto;
+        width: 100%;
+        box-shadow: none;
+    }
+    #welcome{
+        margin-top:50px;
+        width: 100%;
+        word-wrap: break-word;
+        padding:50px 40px;
+        /* white-space: normal; */
+        position: relative;
+        text-align: center;
+    }
+    #corousel-body{
+        box-shadow: 0 0 0px 0px rgb(255, 255, 255);
+    }
+    #welcome p{
+        width:auto;
+        margin-left: 0px;
+    }
+
+}
