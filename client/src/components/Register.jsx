@@ -99,7 +99,8 @@ const Register = () => {
                         <img src={user.profileImage || avatar} height='170px'
                             width='170px' alt='Upload'
                             id='Avatar'
-                            onClick={AvatarClick}></img>
+                            onClick={AvatarClick}
+                            loading='lazy'></img>
                         <input
                             type='file'
                             name='profileImage'

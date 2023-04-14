@@ -1,13 +1,13 @@
 const express=require("express");
 const bcrypt=require("bcrypt");
-const router =express.Router();
 const jwt = require("jsonwebtoken");
+
+const router =express.Router();
 
 const Authenticate = require('../middleware/Authenticate')
 
 require('../db/conn');
 const User=require('../db/userSchema');
-
 
 
 
@@ -34,6 +34,7 @@ router.post('/register',(req,res)=>{
         }
     ).catch(err=>{console.log(err)});
 })
+
 
 router.post('/login',(req,res)=>{
     const {phone, password} = req.body;
@@ -62,19 +63,21 @@ router.post('/login',(req,res)=>{
     ).catch(err=>{res.status(422).json({message:"user does not exist"});})
 })
 
+
 router.get('/getData',Authenticate, (req,res)=>{
     res.status(200).send(req.rootUser);
 })
 
-router.get('/logout',Authenticate, (req,res)=>{
-    res.clearCookie('jwtoken',{path:'/'});
+
+router.get('/logout', Authenticate, (req,res)=>{
     req.rootUser.tokens=req.rootUser.tokens.filter((item)=>{
         return item.token!==req.token
     })
     req.rootUser.save().then(()=>{
-        res.status(200).json({message:'User logged out'});
+    res.status(202).clearCookie('jwtoken').send('cookie cleared');
     })
 })
+
 
 router.post('/verify', Authenticate, (req,res)=>{
     const {pass}=req.body;
@@ -87,6 +90,7 @@ router.post('/verify', Authenticate, (req,res)=>{
         }
     });
 })
+
 
 router.post('/editprofile', (req, res) => {
     const {_id, name, email, phone, profileImage} = req.body;
@@ -113,6 +117,7 @@ router.post('/editprofile', (req, res) => {
     }).catch(err=>{console.log(err)});
 })
 
+
 router.post('/delete', Authenticate, (req,res)=>{
     const {pass}=req.body;
     bcrypt.compare(pass, req.rootUser.password,(err,result)=>{
@@ -127,7 +132,6 @@ router.post('/delete', Authenticate, (req,res)=>{
         }
     });
 })
-
 
 
 module.exports = router;

@@ -8,6 +8,11 @@
 }
 #corousel-body{
     box-shadow: 0 0 20px 10px rgb(137, 133, 141);
+    border-radius: 5px;
+    height:393px;
+}
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    visibility:hidden;
 }
 #welcome{
     margin:auto;
@@ -20,6 +25,40 @@
     padding:10px 5px;
     width:900px;
     margin-left: -105px;
+}
+.loading{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    height: 53vh;
+}
+.loading p{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding-left: 15px;
+    font-weight: 400;
+    font-size: larger;
+}
+.loader {
+    /* position: absolute;
+    left:48vw; */
+    border: 6px solid #9e9c9c;
+    /* Light grey */
+    border-top: 6px solid green;
+    /* Blue */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 2s linear infinite;
+}
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 @media screen and (max-width:750px){
     #corousel{

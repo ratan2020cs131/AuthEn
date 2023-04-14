@@ -5,10 +5,11 @@ import './css/aboutStyle.css';
 
 const About = () => {
     const navigate = useNavigate();
-    const [userData, setUserData] = useState({});
+    const [userData, setUserData] = useState('');
 
     const callAbout = async () => {
         try {
+            if (userData !== '') { return 0 }
             const res = await fetch('/getData', {
                 method: 'GET',
                 headers: {
@@ -45,34 +46,42 @@ const About = () => {
     }
 
     return (
-        <div id='profile'>
-            <div id='profileCont'>
-                <div className='entity' id='Item'>Name</div>
-                <div className='entity' id='Itemvalue'>{userData.name}</div>
-            </div>
-            <div id='profileCont'>
-                <div className='entity' id='Item'>Email</div>
-                <div className='entity' id='Itemvalue'>{userData.email}</div>
-            </div>
-            <div id='profileCont'>
-                <div className='entity' id='Item'>Phone</div>
-                <div className='entity' id='Itemvalue'>{userData.phone}</div>
-            </div>
-            <div id='profilePic'>
-                <img src={userData.profileImage || avatar}
-                    height='120px'
-                    width='120px'
-                    alt='profile'
-                    id='DP' />
-            </div>
-            <button type='submit' className='btn btn-primary' id='edit' name='register'
-                value='edit' onClick={editProfile}
-            >Edit</button>
+        <>
+        { (userData === '') ?
+            <div className='loading'>
+                <div className="loader"></div>
+                <p>Loading...</p>
+            </div> :
+            <div id='profile'>
+                <div id='profileCont'>
+                    <div className='entity' id='Item'>Name</div>
+                    <div className='entity' id='Itemvalue'>{userData.name}</div>
+                </div>
+                <div id='profileCont'>
+                    <div className='entity' id='Item'>Email</div>
+                    <div className='entity' id='Itemvalue'>{userData.email}</div>
+                </div>
+                <div id='profileCont'>
+                    <div className='entity' id='Item'>Phone</div>
+                    <div className='entity' id='Itemvalue'>{userData.phone}</div>
+                </div>
+                <div id='profilePic'>
+                    <img src={userData.profileImage || avatar}
+                        height='120px'
+                        width='120px'
+                        alt='profile'
+                        id='DP' />
+                </div>
+                <button type='submit' className='btn btn-primary' id='edit' name='register'
+                    value='edit' onClick={editProfile}
+                >Edit</button>
 
-            <button type='submit' className='btn btn-primary' id='delete' name='register'
-                value='delete' onClick={deleteAcc}
-            >Delete Account</button>
-        </div>
+                <button type='submit' className='btn btn-primary' id='delete' name='register'
+                    value='delete' onClick={deleteAcc}
+                >Delete Account</button>
+            </div>
+        }
+        </>
     )
 }
 

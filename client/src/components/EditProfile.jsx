@@ -23,7 +23,7 @@ const EditProfile = () => {
     const wrongPass = document.querySelector('#wrongPass');
 
     let name, value;
-    let userInfo = { name: '', email: '', phone: '' };
+    //let userInfo = { name: '', email: '', phone: '' };
     const handlePassChange = (event) => {
         value = event.target.value;
         setPass(value);
@@ -62,9 +62,9 @@ const EditProfile = () => {
             if (res.status === 200) {
                 res.json().then((data) => {
                     setUserData(data);
-                    userInfo.name = userData.name;
-                    userInfo.name = userData.email;
-                    userInfo.name = userData.name;
+                    // userInfo.name = userData.name;
+                    // userInfo.name = userData.email;
+                    // userInfo.name = userData.name;
                 })
                 document.querySelector('#verifybtn').innerHTML = 'Verify';
                 verify.style.display = 'none';

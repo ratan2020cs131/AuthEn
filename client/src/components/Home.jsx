@@ -51,19 +51,19 @@ const Home = () => {
                     </div>
                     <div className="carousel-inner">
                         <div className="carousel-item active">
-                            <img src={mongo} className="d-block w-100" alt="..."/>
+                            <img src={mongo} className="d-block w-100" alt="..." loading='lazy'/>
                         </div>
 
                         <div className="carousel-item">
-                            <img src={express} className="d-block w-100" alt="..."/>
+                            <img src={express} className="d-block w-100" alt="..." loading='lazy'/>
                         </div>
 
                         <div className="carousel-item">
-                            <img src={react} className="d-block w-100" alt="..."/>
+                            <img src={react} className="d-block w-100" alt="..." loading='lazy'/>
                         </div>
 
                         <div className="carousel-item">
-                            <img src={node} className="d-block w-100" alt="..."/>
+                            <img src={node} className="d-block w-100" alt="..." loading='lazy'/>
                         </div>
                     </div>
                     <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
