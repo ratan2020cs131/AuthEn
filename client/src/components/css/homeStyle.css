@@ -78,6 +78,7 @@
     }
     #corousel-body{
         box-shadow: 0 0 0px 0px rgb(255, 255, 255);
+        height: 25vh;
     }
     #welcome p{
         width:auto;
