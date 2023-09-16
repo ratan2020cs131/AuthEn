@@ -45,7 +45,7 @@ const Register = () => {
         button.innerHTML = 'Signing...';
         event.preventDefault();
         const { _id, name, email, phone, password, cpassword, profileImage } = user;
-        const res = await fetch('/register', {
+        const res = await fetch('https://authen-api.onrender.com/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

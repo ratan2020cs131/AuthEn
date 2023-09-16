@@ -6,7 +6,7 @@ const Logout = () => {
     const navigate = useNavigate();
     const { state, dispatch } = useContext(userContext);
     const logOut = () => {
-        fetch('/logout', {
+        fetch('https://authen-api.onrender.com/logout', {
             method: 'GET',
             headers: {
                 Accept: 'application/json',

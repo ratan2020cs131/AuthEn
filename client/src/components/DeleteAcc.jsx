@@ -20,7 +20,7 @@ const DeleteAcc = () => {
     const sendPass = (event) => {
         verifybtn.innerHTML='Verifying...'
         event.preventDefault();
-        fetch('/delete', {
+        fetch('https://authen-api.onrender.com/delete', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

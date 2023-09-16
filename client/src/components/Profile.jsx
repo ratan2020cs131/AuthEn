@@ -10,7 +10,7 @@ const About = () => {
     const callAbout = async () => {
         try {
             if (userData !== '') { return 0 }
-            const res = await fetch('/getData', {
+            const res = await fetch('https://authen-api.onrender.com/getData', {
                 method: 'GET',
                 headers: {
                     Accept: 'application/json',

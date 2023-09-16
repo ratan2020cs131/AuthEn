@@ -17,7 +17,8 @@ router.post('/login', Login);
 router.get('/logout', Authenticate, Logout);
 router.post('/verify', Authenticate, Verify);
 router.post('/delete', Authenticate, Delete);
-router.post('/editprofile', EditProfile)
+router.post('/editprofile', EditProfile);
+router.get('/getData',Authenticate, (req,res)=>res.status(200).send(req.rootUser));
 
 
 module.exports = router;
