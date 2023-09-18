@@ -133,10 +133,4 @@ const Delete = (req, res) => {
 }
 
 
-//GET_DATA
-const Getdata = (req,res) => {
-    return res.status(200).send(req.rootUser);
-}
-
-
-module.exports = { Register, Login, Logout, Verify, EditProfile, Delete, Getdata };
+module.exports = { Register, Login, Logout, Verify, EditProfile, Delete };

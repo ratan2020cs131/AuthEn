@@ -8,8 +8,7 @@ const {
     Logout,
     Verify,
     EditProfile,
-    Delete,
-    Getdata
+    Delete
 } = require('./controller');
 
 
@@ -19,7 +18,7 @@ router.get('/logout', Authenticate, Logout);
 router.post('/verify', Authenticate, Verify);
 router.post('/delete', Authenticate, Delete);
 router.post('/editprofile', EditProfile);
-router.get('/getData', Authenticate, Getdata);
+router.get('/getData',Authenticate, (req,res)=>res.status(200).send(req.rootUser));
 
 
 module.exports = router;

@@ -9,13 +9,12 @@ const Navbar = () => {
 
   const callAbout = async () => {
     try {
-      const res = await fetch('https://authen-api.onrender.com/getData', {
+      const res = await fetch('/getData', {
         method: 'GET',
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json'
         },
-        withCredentials: true,
         credentials: 'include'
       });
 
