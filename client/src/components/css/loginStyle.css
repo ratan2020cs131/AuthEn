@@ -1,125 +1,187 @@
-.box{
+.box {
   margin: auto;
   margin-top: 60px;
-  padding:30px;
-  height:550px;
-  width:360px;
+  padding: 30px;
+  height: 550px;
+  width: 360px;
   box-shadow: 0 0 10px 1px rgb(228, 208, 246);
-  border-radius:5px;
+  border-radius: 5px;
 }
-.head{
-  text-align:center;
+
+.head {
+  text-align: center;
   margin-top: 65px;
 }
-form{
-  margin-top:50px;
+
+form {
+  margin-top: 50px;
   text-align: center;
 }
-.form-input{
-  padding:10px;
+
+.form-input {
+  padding: 10px;
   display: flex;
 }
-.form-control{
-  outline:none;
-  border:none;
+
+.form-control {
+  outline: none;
+  border: none;
   border-radius: 0;
   border-bottom: 1px solid blueviolet;
-  background:transparent;
+  background: transparent;
   padding: 1px;
 }
-.input-group{
+
+.input-group {
   padding-right: 5px;
   width: 10%;
-  padding-top:10px;
+  padding-top: 10px;
 }
-.form-control:focus{
-  outline:none;
-  border:none;
+
+.form-control:focus {
+  outline: none;
+  border: none;
   border-radius: 3px;
   transition: 0.7s ease;
 }
-.form-control-check{
+
+.form-control-check {
   padding-top: 5px;
 }
-.btn{
-  width:90px;
-  margin:15px;
+
+.btn {
+  width: 90px;
+  margin: 15px;
 }
-.remember{
+
+.remember {
   display: flexbox;
   text-align: center;
   justify-content: space-around;
-  margin-top:20px;
+  margin-top: 20px;
   align-items: center;
 }
-.remember label{
+
+.remember label {
   padding: 0 15px;
 }
-.register{
+
+.register {
   padding: 10px 0;
-  text-align:center;
+  text-align: center;
 }
-#logImage{
+
+#logImage {
   background-image: url('../images/login.svg');
   /* height: 530px; */
-  width:300px;
+  width: 300px;
   border-radius: 10px 0px 0px 10px;
 }
+
 #wrongPass,
 #wrongPhone,
 #emptyPass,
-#emptyPhone{
-  color:rgb(203, 7, 7);
+#emptyPhone {
+  color: rgb(203, 7, 7);
 }
 
-.hide{
-  display:none;
+.hide {
+  display: none;
 }
-h5{
-  margin-top:30px;
+
+h5 {
+  margin-top: 30px;
   margin-bottom: -40px;
-  text-align:center;
-  color:rgb(203, 7, 7);
+  text-align: center;
+  color: rgb(203, 7, 7);
 }
-#aboutErr{
+
+#aboutErr {
   margin: auto;
 }
 
-@media screen and (max-width:750px){
-  .box{
-    margin:0;
+#forgotPass {
+  margin: 70px auto;
+  display: inline-block;
+  /* border: 1px solid black; */
+  border-radius: 10px;
+  box-shadow: 0 0 10px 1px rgb(228, 208, 246);
+  display: inline-block;
+  padding: 20px 10px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width:400px;
+}
+
+#forgotPass #verify{
+  margin:5px 30px;
+}
+
+#forgotPass #verify input {
+  margin:5px 0px;
+  width: 60%;
+  text-align: center;
+}
+
+#forgotPass #verify button {
+  width: 170px;
+}
+
+#forgotPass #verify p {
+  padding:10px 0px;
+  margin-top: 0px;
+  width:100%
+}
+
+
+@media screen and (max-width:750px) {
+  .box {
+    margin: 0;
     /* position: absolute; */
     display: flex;
-    flex-direction:column;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
     width: 100%;
-    box-shadow:none;
+    box-shadow: none;
     clear: both;
     padding: 10px;
   }
-  .head{
+
+  .head {
     margin-top: -180px;
   }
-  .form-input{
-    padding:0;
+
+  .form-input {
+    padding: 0;
     padding-top: 15px;
   }
-  .form-control{
-    width:230px;
+
+  .form-control {
+    width: 230px;
   }
-  .remember{
+
+  .remember {
     padding-top: 20px;
   }
-  .btn{
+
+  .btn {
     width: 170px;
   }
-  #logImage{
+
+  #logImage {
     display: none;
-} 
-h5{
-  margin-bottom: 2px;
-  font-size: medium;
-}
+  }
+
+  h5 {
+    margin-bottom: 2px;
+    font-size: medium;
+  }
+
+  #forgotPass {
+    box-shadow: none;
+    width: 100%;
+  }
 }

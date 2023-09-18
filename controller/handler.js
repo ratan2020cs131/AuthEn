@@ -8,7 +8,6 @@ const forgotPass = async (req, res) => {
 
     if (userExist) {
         const token = await userExist.generatePassToken();
-        console.log(token);
 
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
@@ -48,50 +47,54 @@ const forgotPass = async (req, res) => {
 
         const info = await transporter.sendMail(mailOptions);
 
-        if(info){
-            return res.send({message:"email sent"});
+        if (info) {
+            return res.status(200).send({ message: "Reset link sent" });
         }
 
     } else {
-        return res.status(404).json({ message: "Email does not exist" });
+        return res.status(404).json({ message: "User does not exist" });
     }
 }
 
 
-const verifyToken = async(req, res ) => {
-    try{
+const verifyToken = async (req, res) => {
+    try {
         const token = req.params['token'];
-        
-        const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-        console.log(verifyToken);
-        const user = await User.findOne({_id: verifyToken._id});
 
-        if(!user){throw new Error('User not found');}
-        else{
-            res.redirect(`http://localhost:3000/reset-password/${token}`);
+        const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
+        const user = await User.findOne({ _id: verifyToken._id });
+        if (!user) { throw new Error('User not found'); }
+
+        if (user.resetPass === token) {
+            res.redirect(`https://authen-two.vercel.app/reset-password/${token}`);
+        } else {
+            throw new Error('Token Expired');
         }
     }
-    catch(error){
-        res.status(401).send({message:'Unauthorised'});
+    catch (err) {
+        res.status(401).send({ message: 'Unauthorised'});
     }
 }
 
-const resetPassword  = async (req, res) => {
-    try{
+const resetPassword = async (req, res) => {
+    try {
         const token = req.params['token'];
         const { password } = req.body;
         const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
-        const user = await User.findOne({_id: verifyToken._id});
-        if(!user){throw new Error('User not found');}
-        else{
-            user.resetPass="";
-            user.password=password;
+        const user = await User.findOne({ _id: verifyToken._id });
+        if (!user) { throw new Error('User not found'); }
+        if (user.resetPass === token) {
+            user.resetPass = "";
+            user.password = password;
             await user.save();
-            res.send({message:"password updated"})
+            res.status(200).send({ message: "Password updated" })
+        }
+        else {
+            res.status(400).send({ message: "Token already used" })
         }
     }
-    catch(error){
-        res.status(401).send({message:'Unauthorised'});
+    catch (error) {
+        res.status(401).send({ message: 'Unauthorised' });
     }
 }
 

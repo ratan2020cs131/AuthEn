@@ -11,6 +11,8 @@ import Logout from './components/Logout';
 import Footer from './components/Footer';
 import EditProfile from './components/EditProfile';
 import DeleteAcc from './components/DeleteAcc';
+import ForgotPass from './components/ForgotPass';
+import ResetPass from './components/ResetPass';
 import { initialState, reducer } from './reducer/UseReduce';
 
 export const userContext = createContext();
@@ -48,6 +50,14 @@ const Routing = () => {
 
       <Route path='/deleteacc'
         element={<DeleteAcc />}>
+      </Route>
+
+      <Route path='/forgot-password'
+        element={<ForgotPass />}>
+      </Route>
+
+      <Route path='/reset-password/:token'
+        element={<ResetPass />}>
       </Route>
 
       <Route path='*'

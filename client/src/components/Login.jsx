@@ -128,6 +128,9 @@ const Login = () => {
                             id='loginbtn'
                             onClick={sendData}
                         >Login</button>
+                        <div>
+                        <NavLink to="/forgot-password">Forgot Password?</NavLink>
+                        </div>
                     </form>
                     <div className='register'>New Here?<br></br>Click here to&nbsp;
                         <NavLink to="/register">Register</NavLink>
