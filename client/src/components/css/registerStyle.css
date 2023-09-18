@@ -12,7 +12,7 @@
     flex-direction: row;
 }
 #regImage{
-    background-image: url('../images/register1.png');
+    background-image: url('../images/register1.svg');
     /* height: 530px; */
     object-fit: contain;
     width:300px;

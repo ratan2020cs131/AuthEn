@@ -60,7 +60,7 @@ form{
   text-align:center;
 }
 #logImage{
-  background-image: url('../images/login.jpg');
+  background-image: url('../images/login.svg');
   /* height: 530px; */
   width:300px;
   border-radius: 10px 0px 0px 10px;
