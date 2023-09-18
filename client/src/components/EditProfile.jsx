@@ -50,7 +50,7 @@ const EditProfile = () => {
     const sendPass = (event) => {
         document.querySelector('#verifybtn').innerHTML = 'Verifying...';
         event.preventDefault();
-        fetch('https://authen-api.onrender.com/verify', {
+        fetch('/verify', {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

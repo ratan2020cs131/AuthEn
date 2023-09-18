@@ -28,7 +28,7 @@ const Login = () => {
         document.querySelector('#loginbtn').innerHTML = 'Logging...';
         event.preventDefault();
         const { phone, password } = user;
-        fetch('https://authen-api.onrender.com/login', {
+        fetch('/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
