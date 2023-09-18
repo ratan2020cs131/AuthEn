@@ -25,6 +25,22 @@ if(process.env.NODE_ENV == 'production'){
         app.use(express.static(path.resolve(__dirname,'client','build')));
         res.sendFile(path.resolve(__dirname,'client','build','index.html'));
     });
+    app.get('/register',(req,res)=>{
+        app.use(express.static(path.resolve(__dirname,'client','build')));
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    });
+    app.get('/editprofile',(req,res)=>{
+        app.use(express.static(path.resolve(__dirname,'client','build')));
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    });
+    app.get('/profile',(req,res)=>{
+        app.use(express.static(path.resolve(__dirname,'client','build')));
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    });
+    app.get('/abouterr',(req,res)=>{
+        app.use(express.static(path.resolve(__dirname,'client','build')));
+        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+    });
 }
 
 app.listen(port,()=>{
