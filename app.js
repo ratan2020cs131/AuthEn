@@ -1,48 +1,29 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cookieParser = require('cookie-parser');
-dotenv.config({path: './config.env'});
+dotenv.config({ path: './config.env' });
 
-port=process.env.PORT;
+port = process.env.PORT;
 
-const app=express();
+const app = express();
 require('./db/conn');
 
-app.use(express.json({limit: '8mb'}));
-app.use(express.urlencoded({limit: '8mb', extended: true}));
+app.use(express.json({ limit: '8mb' }));
+app.use(express.urlencoded({ limit: '8mb', extended: true }));
 
 app.use(cookieParser());
 
 app.use(require('./router/auth'))
 
-if(process.env.NODE_ENV == 'production'){
-    const path=require('path');
-    app.get('/',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')));
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    });
-    app.get('/login',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')));
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    });
-    app.get('/register',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')));
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    });
-    app.get('/editprofile',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')));
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    });
-    app.get('/profile',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')));
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
-    });
-    app.get('/abouterr',(req,res)=>{
-        app.use(express.static(path.resolve(__dirname,'client','build')));
-        res.sendFile(path.resolve(__dirname,'client','build','index.html'));
+if (process.env.NODE_ENV == 'production') {
+    const path = require('path');
+    const routes = ['/', '/login', '/register', '/profile', '/editprofile', '/abouterr'];
+    app.get(routes, (req, res) => {
+        app.use(express.static(path.resolve(__dirname, 'client', 'build')));
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     });
 }
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log(`server running at ${port}`);
 })

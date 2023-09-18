@@ -1,14 +1,11 @@
 const express=require("express");
 const bcrypt=require("bcrypt");
 const jwt = require("jsonwebtoken");
-
 const router =express.Router();
-
 const Authenticate = require('../middleware/Authenticate')
-
-require('../db/conn');
 const User=require('../db/userSchema');
-
+const { forgotPass, verifyToken, resetPassword } = require('../controller/handler');
+require('../db/conn');
 
 
 router.post('/register',(req,res)=>{
@@ -133,5 +130,9 @@ router.post('/delete', Authenticate, (req,res)=>{
     });
 })
 
+
+router.post('/forgot-password', forgotPass);
+router.get('/reset-password/:token', verifyToken);
+router.post('/reset-password/:token', resetPassword);
 
 module.exports = router;
