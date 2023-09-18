@@ -5,10 +5,11 @@
             "use": "@vercel/node"
         }
     ],
+    
     "rewrites": [
         {
-            "src": "./*",
-            "dest": "app.js"
+            "source": "/(.*)",
+            "destination": "/"
         }
     ]
 }
