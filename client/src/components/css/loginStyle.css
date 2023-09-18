@@ -56,12 +56,12 @@ form{
   padding: 0 15px;
 }
 .register{
-  margin-top:50px;
+  padding: 10px 0;
   text-align:center;
 }
 #logImage{
   background-image: url('../images/login.jpg');
-  height: 530px;
+  /* height: 530px; */
   width:300px;
   border-radius: 10px 0px 0px 10px;
 }

@@ -4,7 +4,7 @@
     margin:auto;
     height:auto;
     margin-top:70px;
-    padding-bottom: 100px;
+    padding-bottom: 140px;
 }
 #corousel-body{
     box-shadow: 0 0 20px 10px rgb(137, 133, 141);
@@ -23,8 +23,6 @@
 #welcome p{
     text-align: justify;
     padding:10px 5px;
-    width:900px;
-    margin-left: -105px;
 }
 .loading{
     display: flex;
@@ -78,7 +76,7 @@
     }
     #corousel-body{
         box-shadow: 0 0 0px 0px rgb(255, 255, 255);
-        height: 27vh;
+        height: auto;
     }
     #welcome p{
         width:auto;

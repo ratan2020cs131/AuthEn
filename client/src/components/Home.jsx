@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import mongo from './images/mongo.png';
-import express from './images/express.png';
-import node from './images/node.png';
-import react from './images/react.png';
+import mongo from './images/mongo.svg';
+import express from './images/express.svg';
+import node from './images/node.svg';
+import react from './images/react.svg';
 import './css/homeStyle.css';
 
 

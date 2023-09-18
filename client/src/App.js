@@ -64,7 +64,7 @@ const App = () => {
       <userContext.Provider value={{ state, dispatch }}>
         <Navbar />
         <Routing />
-        <Footer/>
+        <Footer />
       </userContext.Provider>
     </>
   )

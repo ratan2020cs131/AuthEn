@@ -1,68 +1,85 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap');
-#footer{
-    margin-top:auto;
+
+#footer {
     width: 100%;
-    height: 100px;
+    height: 120px;
+    padding: 20px 0;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
     align-items: center;
-    background-color:	#696969
+    background-color: #696969;
+    position: absolute;
+    /* top: 100%; */
+    bottom: 0px;
 }
 
-.footItem{
-    margin:0 15px;
-    color:white;
+.footItem {
+    color: white;
     font-family: 'Kanit', sans-serif;
 }
-.footItem a{
-    text-decoration:none;
-    color:white;
+
+.footItem a {
+    text-decoration: none;
+    color: white;
 }
 
-.socialLink,.socialLink:hover{
+.socialLink,
+.socialLink:hover {
     text-decoration: none;
-    color:white;
+    color: white;
 }
-.socialImg{
-    margin:7px;
+
+.socialImg {
+    margin: 7px;
 }
-#copyright{
-    margin-top:12px;
-    color:white;
-    font-size:18px;
-    margin-left: -30px;
+
+#copyright {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    width: 30%;
+    margin-top: 12px;
+    color: white;
+    font-size: 18px;
 }
-#contact{
+
+#contact {
+    width: 70%;
     margin: auto 0px;
-    margin-right: -150px;
-    text-align:left;
+    text-align: left;
     display: flex;
     flex-direction: row;
-}
-#copyPara{
-    margin:-25px;
-    font-size:10px;
-}
-.fa-brands,.fa-solid{
-    margin: 0;
-    margin-right: 5px;
+    gap:10px;
+    justify-content: center;
 }
 
-@media screen and (max-width:750px){
-    #footer{
-        height: 130px;
-    }
-    #copyright{
-        margin:auto 30px;
-    }
-    #contact{
-        display: flex;
+.contactItem{
+    display: flex;
     flex-direction: column;
-    margin-right:-20px;
+}
+.contactItem i, .contactItem a{
+    line-height:20px;
+    color: white;
+    text-decoration: none;
+}
+
+#copyPara {
+    font-size: 10px;
+}
+
+@media screen and (max-width:320px){
+    #footer {
+        flex-direction: column;
+        height: auto;
+        gap:30px;
     }
-    .footItem{
-        margin:0 15px;
-        margin-right: 40px;
+    #copyright {
+        width: 100%;
+        align-items: center;
+    }
+    #contact {
+        width: 100%;
+        justify-content: center;
     }
 }

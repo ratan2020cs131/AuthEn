@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import './css/registerStyle.css';
-import avatar from './images/avatar.png';
+import avatar from './images/avatar.svg';
 import { converToBase64 } from '../base64/Base64';
 
 
