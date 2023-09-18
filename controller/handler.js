@@ -10,6 +10,8 @@ const forgotPass = async (req, res) => {
         const token = await userExist.generatePassToken();
 
         const transporter = nodemailer.createTransport({
+            port: 465,
+            secure: true,
             service: 'Gmail',
             auth: {
                 user: process.env.USER_MAIL,
@@ -72,7 +74,7 @@ const verifyToken = async (req, res) => {
         }
     }
     catch (err) {
-        res.status(401).send({ message: 'Unauthorised'});
+        res.status(401).send({ message: 'Unauthorised' });
     }
 }
 
