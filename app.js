@@ -17,7 +17,7 @@ app.use(require('./router/auth'))
 
 if (process.env.NODE_ENV == 'production') {
     const path = require('path');
-    const routes = ['/', '/login', '/register', '/profile', '/editprofile', '/abouterr'];
+    const routes = ['/', '/login', '/register', '/profile', '/editprofile', '/forgot-password', '/reset-password/:token', '/abouterr'];
     app.get(routes, (req, res) => {
         app.use(express.static(path.resolve(__dirname, 'client', 'build')));
         res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
