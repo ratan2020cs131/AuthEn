@@ -132,7 +132,7 @@ router.post('/delete', Authenticate, (req,res)=>{
 
 
 router.post('/forgot-password', forgotPass);
-router.get('/reset-password/:token', verifyToken);
+router.get('/verify-pass-token/:token', verifyToken);
 router.post('/reset-password/:token', resetPassword);
 
 module.exports = router;
