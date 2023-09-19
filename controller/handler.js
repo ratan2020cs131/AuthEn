@@ -143,7 +143,7 @@ const forgotPass = async (req, res) => {
             subject: 'Reset Password',
             html: `
             <div>
-                <p style="font-family:open sans;"> Hi <b>Ratan</b>,</p>
+                <p style="font-family:open sans;"> Hi <b>${userExist.name}</b>,</p>
                 <div>
                     <p style="font-family:open sans;">Its okay we are here to help you, please click the follwoing button to reset your password<p>
                     <a href="https://authen-two.vercel.app/verify-pass-token/${token}"
