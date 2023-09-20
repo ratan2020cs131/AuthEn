@@ -14,16 +14,18 @@ const Register = () => {
 
     const navigate = useNavigate();
 
+    const [loader, setLoader] = useState(false);
+    const [error, setError] = useState(false);
+    const [errorMsg, setErrorMsg] = useState();
     const [user, setUser] = useState({
         name: '', email: '', phone: '', password: '', cpassword: '', profileImage: ''
     })
 
-    let name, value;
+    let name, value, file;
 
     const handleProfilePic = async (event) => {
         name = event.target.name;
-        const file = event.target.files[0];
-        console.log(file.size)
+        file = event.target.files[0];
         if (file.size > 500000) {
             alert('image should be less than or equal to 500kb');
         }
@@ -35,14 +37,14 @@ const Register = () => {
     }
 
     const handleChange = (event) => {
+        setError(true);
         name = event.target.name;
         value = event.target.value;
         setUser({ ...user, [name]: value });
     }
 
     const sendData = async (event) => {
-        let button = document.querySelector('#btn');
-        button.innerHTML = 'Signing...';
+        setLoader(true);
         event.preventDefault();
         const { _id, name, email, phone, password, cpassword, profileImage } = user;
         const res = await fetch('/register', {
@@ -52,38 +54,14 @@ const Register = () => {
                 _id, name, email, phone, password, cpassword, profileImage
             })
         });
-        await res.json();
-        let errMsg = document.querySelector('#errMsg');
-        let p1 = document.querySelector('#password');
-        let wp = document.querySelector('#wrongPass');
-        // alert(data.message);
+        const data = await res.json();
+        setLoader(false);
+
         if (res.status === 201) {
             navigate('/login');
-        }
-        if (res.status === 422) {
-            button.innerHTML = 'Register';
-            wp.classList.add('hide');
-            errMsg.classList.remove('hide');
-            errMsg.innerHTML = 'Do not leave any field empty';
-        }
-        if (res.status === 423) {
-            button.innerHTML = 'Register';
-            wp.classList.add('hide');
-            errMsg.classList.remove('hide');
-            errMsg.innerHTML = 'Passwords are not matching';
-        }
-        if (res.status === 424) {
-            button.innerHTML = 'Register';
-            wp.classList.add('hide');
-            errMsg.classList.remove('hide');
-            errMsg.innerHTML = 'Phone number already registered';
-        }
-        if (res.status === 500) {
-            button.innerHTML = 'Register';
-            errMsg.classList.add('hide');
-            p1.style = 'border-bottom:1px solid red;';
-            wp.classList.remove('hide');
-            // alert(data.message);
+        }else{
+            setError(true);
+            setErrorMsg(data.message);
         }
     }
 
@@ -117,7 +95,7 @@ const Register = () => {
                     <form method='POST' id="regForm">
                         <div className='inName form-input'>
                             <span className="input-group">
-                                <i class="fa-solid fa-user"></i>
+                                <i className="fa-solid fa-user"></i>
                             </span>
                             <input type='text' className='form-control' id='name' placeholder='Name'
                                 name="name"
@@ -127,7 +105,7 @@ const Register = () => {
                         </div>
                         <div className='inEmail form-input'>
                             <span className="input-group">
-                                <i class="fa-solid fa-envelope" />
+                                <i className="fa-solid fa-envelope" />
                             </span>
                             <input type='email' className='form-control' id='email' placeholder='example@email.com'
                                 name="email"
@@ -137,7 +115,7 @@ const Register = () => {
                         </div>
                         <div className='inPhone form-input'>
                             <span className="input-group">
-                                <i class="fa-solid fa-phone"></i>
+                                <i className="fa-solid fa-phone"></i>
                             </span>
                             <input type='number' className='form-control' id='phone' placeholder='Phone'
                                 name="phone"
@@ -147,7 +125,7 @@ const Register = () => {
                         </div>
                         <div className='inPass form-input'>
                             <span className="input-group">
-                                <i class="fa-solid fa-lock"></i>
+                                <i className="fa-solid fa-lock"></i>
                             </span>
                             <input type='password' className='form-control' id='password' placeholder='Password'
                                 name="password"
@@ -155,10 +133,9 @@ const Register = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className='hide' id='wrongPass'>Minimum 8 characters required</div>
                         <div className='inPass form-input'>
                             <span className="input-group">
-                                <i class="fa-solid fa-lock"></i>
+                                <i className="fa-solid fa-lock"></i>
                             </span>
                             <input type='password' className='form-control' id='cpassword' placeholder='Confirm'
                                 name="cpassword"
@@ -166,10 +143,20 @@ const Register = () => {
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className="hide" id="errMsg"></div>
-                        <button type='submit' className='btn btn-primary' id='btn' name='register'
-                            value='register' onClick={sendData}
-                        >Register</button>
+
+                        {error?<div id="errMsg">{errorMsg}</div>:null}
+
+                        {loader ?
+                            <div className='loading'>
+                                <div className="loader" style={{height: '35px', width: '35px'}}></div>
+                            </div>
+                            :
+                            <button type='submit' className='btn btn-primary' id='btn' name='register'
+                                value='register' onClick={sendData}
+                            >
+                                Register
+                            </button>
+                        }
                     </form>
                     <div id='regCon'>Already Registered?<br></br> Click here to&nbsp;
                         <NavLink to="/login">Login</NavLink>

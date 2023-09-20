@@ -28,6 +28,9 @@ h4,p{
 }
 #regForm{
     margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 #regCon{
     text-align: center;
@@ -43,6 +46,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 #errMsg{
     color:rgb(203, 7, 7);
+    width: 230px;
+    word-wrap: break-word;
 }
 .hidePhone{
     display: none;

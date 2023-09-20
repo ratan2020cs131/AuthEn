@@ -7,22 +7,22 @@ const bcrypt = require("bcrypt");
 const signupHandler = async (req, res) => {
     const { name, email, phone, password, cpassword, profileImage } = req.body;
 
-    if (!name || !email || !phone || !password || !cpassword || !profileImage) {
-        return res.status(422).json({ message: "pls fill the form" });
+    if (!name || !email || !phone || !password || !cpassword ) {
+        return res.status(422).json({ message: "Please fill the form" });
     }
     if (password != cpassword) {
-        return res.status(423).json({ message: "password does not match" });
+        return res.status(423).json({ message: "Passwords do not match" });
     }
     User.findOne({ phone: phone }).then(
         (userExist) => {
             if (userExist) {
-                return res.status(424).json({ message: "user already exist" });
+                return res.status(424).json({ message: "User already exist" });
             }
 
             const user = new User({ name, email, phone, password, profileImage });
 
             user.save().then(() => {
-                res.status(201).json({ message: "user registered successfully" })
+                res.status(201).json({ message: "User registered successfully" })
             }).catch(err => { res.status(500).json({ message: "Password must have atleast 8 characters" }) })
         }
     ).catch(err => { console.log(err) });
@@ -32,10 +32,10 @@ const signupHandler = async (req, res) => {
 const loginHandler = async (req, res) => {
     const { phone, password } = req.body;
     if (!phone) {
-        return res.status(424).json({ message: "empty username field" });
+        return res.status(424).json({ message: "Enter username" });
     }
     if (!password) {
-        return res.status(423).json({ message: "empty password field" });
+        return res.status(423).json({ message: "Enter password" });
     }
     User.findOne({ phone: phone }).then(
         (userExist) => {
@@ -45,15 +45,15 @@ const loginHandler = async (req, res) => {
                         res.cookie('jwtoken', token, {
                             expires: new Date(Date.now() + 86400000),
                             httpOnly: true
-                        }).status(201).json({ message: "login successfully" });
+                        }).status(201).json({ message: "Login successfully" });
                     });
                 }
                 else {
-                    res.status(401).json({ message: "incorrect password" })
+                    res.status(401).json({ message: "Incorrect password" })
                 }
             })
         }
-    ).catch(err => { res.status(422).json({ message: "user does not exist" }); })
+    ).catch(err => { res.status(422).json({ message: "User does not exist" }); })
 }
 
 

@@ -1,88 +1,67 @@
-import React, { useContext } from 'react';
-import { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { userContext } from '../App';
 import './css/loginStyle.css';
 
 
-
-
-
 const Login = () => {
 
     const { state, dispatch } = useContext(userContext);
-
     const navigate = useNavigate();
+
+    const [loader, setLoader] = useState(false);
+    const [userError, setUserError] = useState(false);
+    const [userErrorMsg, setUserErrorMsg] = useState();
+    const [passError, setPassError] = useState(false);
+    const [passErrorMsg, setPassErrorMsg] = useState();
 
     const [user, setUser] = useState({
         phone: '', password: ''
     })
+
     let name, value;
     const handleChange = (event) => {
+        setPassError(false);
+        setUserError(false)
         name = event.target.name;
         value = event.target.value;
         setUser({ ...user, [name]: value })
     }
 
-    const sendData = (event) => {
-        document.querySelector('#loginbtn').innerHTML = 'Logging...';
+    const sendData = async (event) => {
+        setLoader(true);
         event.preventDefault();
         const { phone, password } = user;
-        fetch('/login', {
+
+        const res = await fetch('/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 phone, password
             })
-        }).then((res) => {
-            let p1 = document.querySelector('#password');
-            let p2 = document.querySelector('#phone');
-            let wp = document.querySelector('#wrongPass');
-            let wu = document.querySelector('#wrongPhone');
-            let ep = document.querySelector('#emptyPass');
-            let ep1 = document.querySelector('#emptyPhone');
+        });
 
-            if (res.status === 201) {
-                dispatch({ type: 'Log', payload: true });
-                navigate('/');
-            }
-            if (res.status === 500) {
-                document.querySelector('#loginbtn').innerHTML = 'Login';
-                ep1.classList.add('hide');
-                wu.classList.add('hide');
-                ep.classList.add('hide');
-                p2.style = 'border-bottom:1px solid blueviolet;';
-                p1.style = 'border-bottom:1px solid red;';
-                wp.classList.remove('hide');
+        const data = await res.json();
 
-            }
-            if (res.status === 422) {
-                document.querySelector('#loginbtn').innerHTML = 'Login';
-                ep1.classList.add('hide');
-                ep.classList.add('hide');
-                p1.style = 'border-bottom:1px solid blueviolet;';
-                wp.classList.add('hide');
-                p2.style = 'border-bottom:1px solid red;';
-                wu.classList.remove('hide');
-            }
-            if (res.status === 423) {
-                document.querySelector('#loginbtn').innerHTML = 'Login';
-                ep1.classList.add('hide');
-                p2.style = 'border-bottom:1px solid blueviolet;';
-                wp.classList.add('hide');
-                p1.style = 'border-bottom:1px solid red;';
-                ep.classList.remove('hide');
-            }
-            if (res.status === 424) {
-                document.querySelector('#loginbtn').innerHTML = 'Login';
-                p1.style = 'border-bottom:1px solid blueviolet;';
-                wp.classList.add('hide');
-                p2.style = 'border-bottom:1px solid red;';
-                ep.classList.add('hide');
-                ep1.classList.remove('hide');
-            }
-        }).catch(err => {console.log(err);})
+        setLoader(false);
+
+        if (res.status === 201) {
+            dispatch({ type: 'Log', payload: true });
+            navigate('/');
+        }
+
+        else if (res.status === 401 || res.status === 423) {
+            setPassError(true);
+            setPassErrorMsg(data.message);
+        }
+
+        else if (res.status === 424 || res.status === 422) {
+            setUserError(true);
+            setUserErrorMsg(data.message);
+        }
+
     }
+
 
     return (
         <div id="box">
@@ -95,41 +74,48 @@ const Login = () => {
 
                         <div className='inEmail form-input'>
                             <span className="input-group">
-                            <i class="fa-solid fa-user"></i>
+                                <i className="fa-solid fa-user"></i>
                             </span>
                             <input type='number' className='form-control' id='phone' name='phone' placeholder='97XXXXXX99'
                                 value={user.phone}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className='hide' id='wrongPhone'>Not Registered</div>
-                        <div className='hide' id='emptyPhone'>Enter Phone Number</div>
+
+                        {
+                            userError ? <div id='wrongPhone'>{userErrorMsg}</div> : null
+                        }
 
                         <div className='inPass form-input'>
                             <span className="input-group">
-                            <i class="fa-solid fa-lock"></i>
+                                <i className="fa-solid fa-lock"></i>
                             </span>
                             <input type='password' className='form-control' id='password' name='password' placeholder='********'
                                 value={user.password}
                                 onChange={handleChange}
                             />
                         </div>
-                        <div className='hide' id='wrongPass'>Wrong Password</div>
-                        <div className='hide' id='emptyPass'>Enter Password</div>
 
-                        {/* <div className='remember'>
-                    <input type="checkbox" className='form-control-check' id='remember'/>
-                    <label htmlFor='remember'>Stay Logged In</label>
-                </div> */}
+                        {
+                            passError ? <div id='wrongPass'>{passErrorMsg} </div> : null
+                        }
 
-                        <button type='submit' className='btn btn-primary'
-                            name='login'
-                            value='login'
-                            id='loginbtn'
-                            onClick={sendData}
-                        >Login</button>
+                        {loader ?
+                            <div className='loading'>
+                                <div className="loader" style={{height: '35px', width: '35px'}}></div>
+                            </div>
+                            :
+                            <button type='submit' className='btn btn-primary'
+                                name='login'
+                                value='login'
+                                id='loginbtn'
+                                onClick={sendData}
+                            >
+                                Login
+                            </button>
+                        }
                         <div>
-                        <NavLink to="/forgot-password">Forgot Password?</NavLink>
+                            <NavLink to="/forgot-password">Forgot Password?</NavLink>
                         </div>
                     </form>
                     <div className='register'>New Here?<br></br>Click here to&nbsp;

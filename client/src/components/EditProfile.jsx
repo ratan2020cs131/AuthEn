@@ -127,7 +127,7 @@ const EditProfile = () => {
 
                 <div className='edit form-input'>
                     <span className="input-group">
-                    <i class="fa-solid fa-user"></i>
+                    <i className="fa-solid fa-user"></i>
                     </span>
                     <input type='text' className='editInfo' placeholder='Name'
                         name="name"
@@ -138,7 +138,7 @@ const EditProfile = () => {
 
                 <div className='edit form-input'>
                     <span className="input-group">
-                    <i class="fa-solid fa-envelope"/>
+                    <i className="fa-solid fa-envelope"/>
                     </span>
                     <input type='email' className='editInfo' placeholder='example@email.com'
                         name="email"
@@ -149,7 +149,7 @@ const EditProfile = () => {
 
                 <div className='edit form-input'>
                     <span className="input-group">
-                    <i class="fa-solid fa-phone"></i>
+                    <i className="fa-solid fa-phone"></i>
                     </span>
                     <input type='number' className='editInfo' placeholder='97XX89XX96'
                         name="phone"

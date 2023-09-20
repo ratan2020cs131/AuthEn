@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import avatar from './images/avatar.png';
+import avatar from './images/ProfileAvatar.png';
 import './css/aboutStyle.css';
 
 const About = () => {
