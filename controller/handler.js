@@ -7,7 +7,7 @@ const bcrypt = require("bcrypt");
 const signupHandler = async (req, res) => {
     const { name, email, phone, password, cpassword, profileImage } = req.body;
 
-    if (!name || !email || !phone || !password || !cpassword ) {
+    if (!name || !email || !phone || !password || !cpassword) {
         return res.status(422).json({ message: "Please fill the form" });
     }
     if (password != cpassword) {
@@ -62,7 +62,7 @@ const logoutHandler = async (req, res) => {
         return item.token !== req.token
     })
     req.rootUser.save().then(() => {
-        res.status(202).clearCookie('jwtoken').json({message:'cookie cleared'});
+        res.status(202).clearCookie('jwtoken').json({ message: 'cookie cleared' });
     })
 }
 
@@ -97,28 +97,38 @@ const verifyPass = async (req, res) => {
 
 
 const editProfile = async (req, res) => {
-    const { _id, name, email, phone, profileImage } = req.body;
-    User.findOne({ _id: _id }).then(
-        (userExist) => {
-            User.findOne({ phone: phone }).then((phoneExist) => {
+    try {
+        const { _id, name, email, phone, profileImage } = req.body;
+        const user = await User.findOne({ _id });
 
-                if (phoneExist && phoneExist.phone !== userExist.phone) {
-                    res.status(501).json({ message: "phone number is already registered" });
-                }
-                else {
-                    userExist.name = name;
-                    userExist.email = email;
-                    userExist.phone = phone;
-                    userExist.profileImage = profileImage;
+        if (user) {
+            const phoneExist = await User.findOne({ phone });
+            if (phoneExist && phoneExist.phone !== user.phone) {
+                return res.status(501).json({ message: "Phone already registered" });
+            }
 
-                    userExist.save().then(() => {
-                        res.status(201).json({ message: "profile updated" });
-                    })
-                        .catch(error => { res.status(500).json({ message: "error updating" }) })
+            const emailExist = await User.findOne({ email });
+            if (emailExist && emailExist.email !== user.email) {
+                return res.status(501).json({ message: "Email already registered" });
+            }
 
-                }
-            })
-        }).catch(err => { console.log(err) });
+            user.name = name;
+            user.email = email;
+            user.phone = phone;
+            user.profileImage = profileImage;
+
+            const result = await user.save();
+            if (result) {
+                return res.status(201).json({ message: "Profile updated" });
+            } else {
+                return res.status(503).json({ message: "Error updating" });
+            }
+        }
+    }
+    catch (err) {
+        console.log(err);
+        return res.status(500).send({ message: "Server down" });
+    }
 }
 
 
